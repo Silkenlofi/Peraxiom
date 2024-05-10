@@ -1,0 +1,489 @@
+<!DOCTYPE html><!--  Last Published: Fri May 10 2024 21:41:05 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="65970b82c52887bc3ef5f043" data-wf-site="65970b81c52887bc3ef5ee62">
+<head>
+  <meta charset="utf-8">
+  <title>Peraxiom | Your Time in Percentages</title>
+  <meta content="Simplifies timekeeping by expressing the current time as a percentage." name="description">
+  <meta content="Peraxiom | Your Time in Percentages" property="og:title">
+  <meta content="Simplifies timekeeping by expressing the current time as a percentage." property="og:description">
+  <meta content="https://uploads-ssl.webflow.com/65970b81c52887bc3ef5ee62/65db5ede8742134620cce5d0_Peraxiom16-9%2Btemplate%2Btimeline-1.webp" property="og:image">
+  <meta content="Peraxiom | Your Time in Percentages" property="twitter:title">
+  <meta content="Simplifies timekeeping by expressing the current time as a percentage." property="twitter:description">
+  <meta content="https://uploads-ssl.webflow.com/65970b81c52887bc3ef5ee62/65db5ede8742134620cce5d0_Peraxiom16-9%2Btemplate%2Btimeline-1.webp" property="twitter:image">
+  <meta property="og:type" content="website">
+  <meta content="summary_large_image" name="twitter:card">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/peraxiom.webflow.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="images/favicon.svg" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.svg" rel="apple-touch-icon">
+  <style>
+    /* Style for selected text */
+    ::selection {
+        background-color: #230c33; /* Dark purple */
+        color: initial; /* Default text color */
+    }
+    /* Style for selected text in Firefox */
+    ::-moz-selection {
+        background-color: #230c33; /* Dark purple */
+        color: initial; /* Default text color */
+    }
+    /* Style for selected text */
+    ::selection {
+        background-color: #caa8f5; /* Light purple */
+        color: initial; /* Default text color */
+    }
+    /* Style for selected text in Firefox */
+    ::-moz-selection {
+        background-color: #caa8f5; /* Light purple */
+        color: initial; /* Default text color */
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: #230c33; /* Dark purple */
+        border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #caa8f5; /* Light purple */
+    }
+</style>
+  <style>
+  html { font-size: 1.125rem; }
+  @media screen and (max-width:1920px) { html { font-size: calc(0.625rem + 0.41666666666666674vw); } }
+  @media screen and (max-width:1440px) { html { font-size: calc(0.8126951092611863rem + 0.20811654526534862vw); } }
+  @media screen and (max-width:479px) { html { font-size: calc(0.9997384937238494rem + 0.41841004184100417vw); } }
+</style>
+  <style>
+html,
+body {
+  width: 100%;
+  overscroll-behavior: none;
+}
+ html.wf-loading * {
+        opacity: 0;
+    }
+    ::-webkit-scrollbar {
+    width: 0px;
+}
+.img {
+  opacity: 0;
+  transition: 0.2s;
+  will-change: transform;
+}
+.img.active {
+  opacity: 1;
+}
+@media only screen and (min-width: 1920px) {
+     body {font-size: 14.4px;}
+     .paragraph-text {font-size: 27px}
+   /*  .carousel-text {font-size: 3.8em} */
+}
+ /* Reveal Hover State for Link 
+.img-hover {
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  -moz-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+.img:hover .img-hover{
+  opacity: 1;
+}
+*/
+</style>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function easeInOutQuad(t) {
+      return t < 0.5 ? 4 * t * t : -1 + (4 - 2 * t) * t;
+    }
+    function updatePercentage(element, duration, targetPercentage) {
+      var startTime;
+      var currentPercentage = 0;
+      function animate(currentTime) {
+        if (!startTime) {
+          startTime = currentTime;
+        }
+        var elapsedTime = currentTime - startTime;
+        if (elapsedTime <= duration) {
+          var easedPercentage = easeInOutQuad(elapsedTime / duration);
+          element.textContent = Math.floor(easedPercentage * targetPercentage) + '%';
+          requestAnimationFrame(animate);
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+    // Function to reset all counters
+    function resetAllCounters() {
+      var dayElement = document.getElementById('live-day');
+      var monthElement = document.getElementById('live-month');
+      var yearElement = document.getElementById('live-year');
+      dayElement.textContent = '0%';
+      monthElement.textContent = '0%';
+      yearElement.textContent = '0%';
+      setTimeout(function() {
+        // After a short delay, start the animation
+        startCounters();
+      }, 100);
+    }
+    // Function to start the animation after the counters are reset
+    function startCounters() {
+      // Initial setup
+      // Get the Text Element by ID for the second tab (day)
+      var dayElement = document.getElementById('live-day');
+      var durationDay = 2000;
+      var targetPercentageDay =
+        (new Date().getHours() * 60 + new Date().getMinutes()) / (24 * 60) * 100;
+      updatePercentage(dayElement, durationDay, targetPercentageDay);
+      // Get the Text Element by ID for the third tab (month)
+      var monthElement = document.getElementById('live-month');
+      var durationMonth = 2000;
+      var targetPercentageMonth =
+        (new Date().getDate() /
+          new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate()) *
+        100;
+      updatePercentage(monthElement, durationMonth, targetPercentageMonth);
+      // Get the Text Element by ID for the fourth tab (year)
+      var yearElement = document.getElementById('live-year');
+      var durationYear = 2000;
+      var startOfYear = new Date(new Date().getFullYear(), 0, 1);
+      var currentDayOfYear = Math.floor(
+        (new Date() - startOfYear) / (24 * 60 * 60 * 1000)
+      );
+      var targetPercentageYear = (currentDayOfYear / 365) * 100;
+      updatePercentage(yearElement, durationYear, targetPercentageYear);
+    }
+    // Get all tab links
+    var tabLinks = document.querySelectorAll('.tab');
+    // Add click event listener to each tab link
+    tabLinks.forEach(function(tabLink) {
+      tabLink.addEventListener('click', function() {
+        // Reset all counters every time any tab link is clicked
+        resetAllCounters();
+      });
+    });
+    // Initial setup
+    // Start the animation initially
+    startCounters();
+  });
+</script>
+</head>
+<body class="body">
+  <div class="w-embed">
+    <style>
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
+  </div>
+  <div class="header-wrapper fixed">
+    <div class="top-bar">
+      <div class="nav">
+        <div id="w-node-_82a9809b-f311-dab6-d7c9-8f6dbd68c3c2-3ef5f043" class="div-block-6">
+          <div class="div-block-7">
+            <div class="text-block">Wednesday</div>
+            <div class="text-block">,</div>
+            <div class="text-block">21</div>
+            <div class="text-block">,</div>
+            <div class="text-block">February</div>
+            <div class="text-block">,</div>
+            <div class="text-block">2024</div>
+          </div><img src="images/leftperfect-logo.svg" loading="lazy" alt="" class="image">
+        </div>
+        <div id="w-node-e4d9c1a7-653d-4732-a41e-11b1082b277e-3ef5f043" class="div-block-10">
+          <a id="w-node-a90aa5d9-71f8-625b-fa1e-a19e65365b4d-3ef5f043" data-w-id="a90aa5d9-71f8-625b-fa1e-a19e65365b4d" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" href="http://www.yourfriendleroy.com" target="_blank" class="button-block-icon w-inline-block">
+            <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ph" width="100%" height="100%" preserveaspectratio="xMidYMid meet" viewbox="0 0 256 256">
+                <path fill="currentColor" d="M232 128a104 104 0 0 1-152.88 91.82l-34.05 11.35a16 16 0 0 1-20.24-20.24l11.35-34.05A104 104 0 1 1 232 128"></path>
+              </svg></div>
+          </a>
+          <a data-w-id="29df7ac2-eca9-b5f1-9ed5-660505eed5b4" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" href="http://www.yourfriendleroy.com" target="_blank" class="button-block-icon w-inline-block">
+            <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveaspectratio="xMidYMid meet" viewbox="0 0 24 24">
+                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m1 15h-2v-6h2zm0-8h-2V7h2z"></path>
+              </svg></div>
+          </a>
+          <a data-w-id="94f9a387-4c5d-22a0-cdf7-16e7f4dbe173" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" href="http://www.yourfriendleroy.com" target="_blank" class="button-block-icon w-inline-block">
+            <div class="icon-embed-xxsmall lgr w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveaspectratio="xMidYMid meet" viewbox="0 0 24 24">
+                <path fill="currentColor" d="M20 8h-2.81a5.985 5.985 0 0 0-1.82-1.96L17 4.41L15.59 3l-2.17 2.17C12.96 5.06 12.49 5 12 5c-.49 0-.96.06-1.41.17L8.41 3L7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20zm-6 8h-4v-2h4zm0-4h-4v-2h4z"></path>
+              </svg></div>
+          </a>
+        </div>
+        <a data-w-id="9f0690f8-c320-ea92-9147-75a766a6376c" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" href="http://www.yourfriendleroy.com" target="_blank" class="button-block-35 reveal w-inline-block">
+          <div class="button-text-35">@leroy</div>
+          <div class="button-icon-block-35">
+            <div style="-webkit-transform:translate3d(0%, 0%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(325deg) skew(0, 0);-moz-transform:translate3d(0%, 0%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(325deg) skew(0, 0);-ms-transform:translate3d(0%, 0%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(325deg) skew(0, 0);transform:translate3d(0%, 0%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(325deg) skew(0, 0)" class="button-text-35-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 448 512"><!-- ! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.  -->
+                <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" fill="currentColor"></path>
+              </svg></div>
+            <div style="-webkit-transform:translate3d(-101%, 101%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(-101%, 101%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(-101%, 101%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(-101%, 101%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="button-text-35-icon is-absolute w-embed"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 448 512"><!-- ! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.  -->
+                <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" fill="currentColor"></path>
+              </svg></div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="header-content">
+      <div class="div-block">
+        <div id="myTabs" data-current="Tab 1" data-easing="ease" data-duration-in="0" data-duration-out="0" class="w-tabs">
+          <div class="tabs-menu w-tab-menu">
+            <a data-w-tab="Tab 1" class="tab w-inline-block w-tab-link w--current">
+              <div>Day,</div>
+            </a>
+            <a data-w-tab="Tab 2" class="tab w-inline-block w-tab-link">
+              <div>Month,</div>
+            </a>
+            <a data-w-tab="Tab 3" class="tab w-inline-block w-tab-link">
+              <div>Year</div>
+            </a>
+          </div>
+          <div id="your-tabs-content-id" class="w-tab-content">
+            <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
+              <h1 id="live-day" class="percentage-heading">(100%)</h1>
+            </div>
+            <div data-w-tab="Tab 2" class="w-tab-pane">
+              <h1 id="live-month" class="percentage-heading">(100%)</h1>
+            </div>
+            <div data-w-tab="Tab 3" class="w-tab-pane">
+              <h1 id="live-year" class="percentage-heading">(100%)</h1>
+            </div>
+          </div>
+        </div>
+        <div class="dayss">
+          <div id="day" class="text-block second">day</div>
+          <div class="text-block second">,</div>
+          <div id="date" class="text-block second">date</div>
+          <div class="text-block second">,</div>
+          <div id="month" class="text-block second">month</div>
+          <div class="text-block second">,</div>
+          <div id="year" class="text-block second">year</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-section">
+      <div class="scroll-content">
+        <div class="img-section">
+          <div class="wrap img-1">
+            <div class="img">
+              <div class="img-inner _1"><img src="images/cat-time.gif" loading="lazy" alt="" class="image-2"></div>
+            </div>
+          </div>
+        </div>
+        <div class="img-section">
+          <div class="wrap img-2">
+            <div class="img">
+              <div class="img-inner _1"><img src="images/cat-time-2.gif" loading="lazy" alt="" class="image-2"></div>
+            </div>
+          </div>
+        </div>
+        <div class="img-section">
+          <div class="wrap img-3">
+            <div class="img">
+              <div class="img-inner _1"><img src="images/cat-gif-3.gif" loading="lazy" alt="" class="image-2"></div>
+            </div>
+          </div>
+        </div>
+        <div class="img-section">
+          <div class="wrap img-4">
+            <div class="img">
+              <div class="img-inner _1"><img src="images/cat-time-4.gif" loading="lazy" alt="" class="image-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="div-block-8">
+    <div class="div-block-9">
+      <div class="div-block-11">
+        <div class="nav-menu-highlight-help">
+          <div class="nav-help-text">&#x27;leage a suggestion&#x27;</div>
+          <div class="nav-help-text">&#x27;learn about&#x27;</div>
+          <div class="nav-help-text">&#x27;report a bug&#x27;</div>
+        </div>
+        <div class="dayss hidden">
+          <div id="d-y" class="text-block second">day</div>
+          <div class="text-block second">,</div>
+          <div id="d-te" class="text-block second">date</div>
+          <div class="text-block second">,</div>
+          <div id="m-nt" class="text-block second">month</div>
+          <div class="text-block second">,</div>
+          <div id="y-ar" class="text-block second">year</div>
+        </div>
+      </div>
+      <div class="dayss">
+        <div id="quote" class="text-block second quote">quote</div>
+        <div class="w-embed w-script">
+          <script>
+  // Array of quotes
+  var quotes = [
+    "The only way to do great work is to love what you do. – Steve Jobs",
+    "Innovation distinguishes between a leader and a follower. – Steve Jobs",
+    "Your time is limited, don't waste it living someone else's life. – Steve Jobs",
+    "Stay hungry, stay foolish. – Steve Jobs",
+    "Don't let the noise of others' opinions drown out your own inner voice. – Steve Jobs",
+    "Design is not just what it looks like and feels like. Design is how it works. – Steve Jobs"
+  ];
+  // Function to display a random quote
+  function displayRandomQuote() {
+    // Get a random index
+    var randomIndex = Math.floor(Math.random() * quotes.length);
+    // Get the random quote
+    var randomQuote = quotes[randomIndex];
+    // Update the text content of the quote element
+    document.getElementById('quote').textContent = randomQuote;
+  }
+  // Call displayRandomQuote function initially
+  displayRandomQuote();
+</script>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="display:none" class="modal-wrapper">
+    <div data-w-id="c13e776e-d2d8-65ea-6788-ab8113a3a656" class="modal-close"></div>
+    <div style="opacity:0;-webkit-transform:translate3d(0, -9.375rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, -9.375rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, -9.375rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, -9.375rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="modal">
+      <div class="modal-content">
+        <div class="div-block-12"><img src="images/leftperfect-logo---pink.svg" loading="lazy" alt="" class="image mod-al">
+          <h1 class="heading-3"><strong>Peraxiom</strong></h1>
+        </div>
+        <ul role="list" class="modal-list">
+          <li>
+            <div class="modal-checklist-item">
+              <div class="modal-checklist-icon w-embed"><svg width="32" height="32" viewbox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="11.9102" cy="11.292" r="10.115" stroke="currentColor" stroke-width="2"></circle>
+                  <path d="M8.08948 12.334L11.2156 15.4601L15.3837 7.81857" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg></div>
+              <div>Your future and time in percentages.</div>
+            </div>
+          </li>
+          <li>
+            <div class="modal-checklist-item">
+              <div class="modal-checklist-icon green w-embed"><svg width="32" height="32" viewbox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="11.9102" cy="11.292" r="10.115" stroke="currentColor" stroke-width="2"></circle>
+                  <path d="M8.08948 12.334L11.2156 15.4601L15.3837 7.81857" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg></div>
+              <div>Minimal serving one purpose.</div>
+            </div>
+          </li>
+          <li>
+            <div class="modal-checklist-item">
+              <div class="modal-checklist-icon pink w-embed"><svg width="32" height="32" viewbox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="11.9102" cy="11.292" r="10.115" stroke="currentColor" stroke-width="2"></circle>
+                  <path d="M8.08948 12.334L11.2156 15.4601L15.3837 7.81857" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg></div>
+              <div>Made for fun.</div>
+            </div>
+          </li>
+        </ul>
+        <a data-w-id="22f9621c-36d3-0d44-890b-6d76e6b2df3d" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.9, 0.9, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" href="#" target="_blank" class="button-block-35 mo-dal w-inline-block">
+          <div class="button-text-35">Close me!</div>
+        </a>
+      </div>
+      <div data-w-id="99b16abc-c79e-fc66-d20b-3dc49ddb75db" class="modal-close-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveaspectratio="xMidYMid meet" viewbox="0 0 24 24">
+          <path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"></path>
+        </svg></div>
+    </div>
+  </div>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=65970b81c52887bc3ef5ee62" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+  <script>
+  function updateDate() {
+    // Get current date
+    var currentDate = new Date();
+    // Get day, date, month, and year
+    var day = currentDate.toLocaleString('en-us', { weekday: 'long' });
+    var date = currentDate.getDate();
+    var month = currentDate.toLocaleString('en-us', { month: 'long' });
+    var year = currentDate.getFullYear();
+    // Update placeholder text
+    document.getElementById('day').textContent = day;
+    document.getElementById('date').textContent = date;
+    document.getElementById('month').textContent = month;
+    document.getElementById('year').textContent = year;
+  }
+  // Call updateDate function initially
+  updateDate();
+  // Update date every 1 minute (adjust interval as needed)
+  setInterval(updateDate, 60000); // 60000 milliseconds = 1 minute
+</script>
+  <script>
+const scrollSection = document.querySelector(".scroll-section");
+const scrollContent = document.querySelector(".scroll-content");
+let imgSections = [...document.querySelectorAll(".img-section")];
+let images = [...document.querySelectorAll(".img")];
+let isMobile = false;
+if (
+  /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(
+    navigator.userAgent
+  ) ||
+  /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
+    navigator.userAgent.substr(0, 4)
+  )
+) {
+  isMobile = true;
+}
+  imgSections.forEach((section) => {
+    let clonedSection = section.cloneNode(true);
+    clonedSection.classList.add("clone");
+    scrollContent.appendChild(clonedSection);
+  });
+imgSections = [...document.querySelectorAll(".img-section")];
+images = [...document.querySelectorAll(".img")];
+function init() {
+  document.body.style.height = `${scrollContent.getBoundingClientRect().height}px`;
+}
+window.addEventListener("resize", init);
+function showImages() {
+  images.forEach((image, index) => {
+    setTimeout(() => {
+      image.classList.add("active");
+    }, 200);
+  });
+}
+let target = 1;
+let pause = false;
+images.forEach((image) => {
+  image.addEventListener("mouseover", function () {
+    pause = !pause;
+  });
+});
+images.forEach((image) => {
+  image.addEventListener("mouseleave", function () {
+    pause = false;
+  });
+});
+function autoScroll() {
+  window.scrollTo(0, target);
+  scrollSection.style.transform = `translateY(-${target}px)`;
+  requestAnimationFrame(scrollReset);
+}
+function scrollReset() {
+  target = window.scrollY;
+    if (target <= 0) {
+      target = scrollContent.offsetHeight / 2 - 1;
+      window.scrollTo(0, target);
+    } else if (target >= scrollContent.offsetHeight / 2) {
+      target = 1;
+      window.scrollTo(0, target);
+    }
+  if (pause) {
+    target = window.scrollY;
+  } else {
+    target++;
+  }
+  autoScroll();
+}
+init();
+showImages();
+document.addEventListener("DOMContentLoaded", () => {
+  window.scrollTo(0, 1);
+  scrollReset();
+});
+</script>
+</body>
+</html>
